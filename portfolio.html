@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vandi Joseph — Frontend Developer</title>
+  <meta name="description" content="Frontend developer building thoughtful, accessible, and engaging web experiences.">
+
+  <!-- Fonts from Google Fonts (needs internet) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* Colors in one place, so they are easy to change */
+    :root {
+      --paper: #12100d;
+      --ink: #f4efe6;
+      --ink-soft: #a49c8d;
+      --ember: #ff8a4c;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: var(--paper);
+      color: var(--ink);
+      font-family: "Inter", sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .page {
+      position: relative;
+      min-height: 100vh;
+      overflow: hidden;
+    }
+
+    /* ---------- Glowing blurred circles in the background ---------- */
+    .glow-ember,
+    .glow-blue {
+      position: absolute;
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .glow-ember {
+      left: 50%;
+      top: 50%;
+      width: 820px;
+      height: 820px;
+      transform: translate(-50%, -50%);
+      background: radial-gradient(circle, rgba(255, 138, 76, 0.45), rgba(255, 138, 76, 0) 62%);
+      filter: blur(40px);
+      animation: glow 7s ease-in-out infinite;
+    }
+
+    .glow-blue {
+      right: 12%;
+      top: 18%;
+      width: 360px;
+      height: 360px;
+      background: radial-gradient(circle, rgba(120, 160, 255, 0.22), rgba(120, 160, 255, 0) 65%);
+      filter: blur(50px);
+    }
+
+    /* The orange glow slowly pulses */
+    @keyframes glow {
+      0%, 100% { opacity: 0.55; transform: translate(-50%, -50%) scale(1); }
+      50%      { opacity: 0.85; transform: translate(-50%, -50%) scale(1.08); }
+    }
+
+    /* Cards fade in and slide up when the page loads */
+    @keyframes rise {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ---------- Layout ---------- */
+    .content {
+      position: relative;
+      z-index: 1;
+      max-width: 1024px;
+      margin: 0 auto;
+      padding: 2.5rem 1.5rem;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+    }
+
+    /* A grid with 6 columns; each card says how many columns it takes */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 1rem;
+      width: 100%;
+    }
+
+    /* ---------- The frosted glass effect ---------- */
+    .glass {
+      background: linear-gradient(160deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.03));
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 20px 50px -30px rgba(0, 0, 0, 0.7);
+      animation: rise 0.6s cubic-bezier(0.32, 0.72, 0, 1) both;
+    }
+
+    .card-intro {
+      grid-column: span 6;
+      border-radius: 28px;
+      padding: 1.75rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .card-side {
+      grid-column: span 6;
+      display: grid;
+      grid-template-rows: auto 1fr;
+      gap: 1rem;
+    }
+
+    .card-focus {
+      border-radius: 24px;
+      padding: 1.5rem;
+      animation-delay: 90ms;
+    }
+
+    /* Decorative panel made with CSS only (no image file needed) */
+    .card-art {
+      border-radius: 24px;
+      min-height: 180px;
+      animation-delay: 150ms;
+      background:
+        radial-gradient(circle at 25% 30%, rgba(255, 138, 76, 0.55), transparent 55%),
+        radial-gradient(circle at 80% 75%, rgba(120, 160, 255, 0.4), transparent 55%),
+        rgba(255, 255, 255, 0.04);
+    }
+
+    .card-cta {
+      grid-column: span 6;
+      border-radius: 24px;
+      padding: 1.25rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1.25rem;
+      animation-delay: 210ms;
+    }
+
+    /* ---------- Text ---------- */
+    .label {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.28em;
+      color: var(--ink-soft);
+    }
+  img{
+    border-radius: 24px;
+
+    }
+   .card-art img {
+     width: 100%;
+     height: 100%;
+     object-fit: cover;
+   }
+    h1 {
+      font-family: "Space Grotesk", sans-serif;
+      font-weight: 700;
+      font-size: clamp(3.25rem, 13vw, 6.5rem);
+      line-height: 0.92;
+      letter-spacing: -0.02em;
+      margin-top: 2rem;
+    }
+
+    .subtitle {
+      margin-top: 1.5rem;
+      font-size: 1.125rem;
+      line-height: 1.6;
+      color: rgba(244, 239, 230, 0.9);
+      max-width: 46ch;
+    }
+
+    .goal {
+      margin-top: 0.75rem;
+      font-size: 0.875rem;
+      color: var(--ink-soft);
+    }
+
+    /* ---------- Button ---------- */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      border-radius: 9999px;
+      background: var(--ember);
+      color: var(--paper);
+      padding: 0.875rem 1.75rem;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 15px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: background 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .btn:hover,
+    .btn:focus-visible {
+      background: rgba(255, 138, 76, 0.85);
+      box-shadow: 0 18px 45px -12px rgba(255, 138, 76, 0.6);
+    }
+
+    .btn .arrow { transition: transform 0.2s ease; }
+    .btn:hover .arrow { transform: translateX(4px); }
+
+    /* ---------- Tablet and larger screens ---------- */
+    @media (min-width: 640px) {
+      .content { padding: 4rem 1.5rem; }
+      .card-intro { grid-column: span 4; padding: 2.5rem; }
+      .card-side { grid-column: span 2; }
+      .card-cta { flex-direction: row; align-items: center; padding: 1.5rem; }
+      .subtitle { font-size: 1.25rem; }
+      h1 { font-size: clamp(3.75rem, 8vw, 6rem); }
+    }
+
+    /* Turn off animation for people who prefer less motion */
+    @media (prefers-reduced-motion: reduce) {
+      .glow-ember, .glass { animation: none; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="page">
+    <!-- Background glows -->
+    <div class="glow-ember" aria-hidden="true"></div>
+    <div class="glow-blue" aria-hidden="true"></div>
+
+    <div class="content">
+      <div class="grid">
+
+        <section class="glass card-intro">
+          <span class="label">01 — Portfolio</span>
+          <div>
+            <h1>Vandi<br>Joseph</h1>
+            <p class="subtitle">
+              Frontend developer building thoughtful, accessible, and engaging web experiences.
+            </p>
+          </div>
+        </section>
+
+        <div class="card-side">
+          <section class="glass card-focus">
+            <span class="label">02 — Focus</span>
+            <p class="goal">
+              I&rsquo;m growing my skills to turn creative ideas into useful, beautifully crafted interfaces.
+            </p>
+          </section>
+          <div class="glass card-art" aria-hidden="true"><img src ="WhatsApp Image 2026-10-04 at 18.56.57.jpeg" alt=""></div>
+        </div>
+
+        <section class="glass card-cta">
+          <span class="label">03 — Open to work</span>
+          <a href="#" class="btn">View My Projects <span class="arrow">&rarr;</span></a>
+        </section>
+
+      </div>
+    </div>
+  </div>
+</body>
+</html>
